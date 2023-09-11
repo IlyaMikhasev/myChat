@@ -1,0 +1,71 @@
+﻿<Window x:Class="myChat.ChatPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:myChat"
+        mc:Ignorable="d"
+        Title="ChatPanel" Height="724" Width="275" MinWidth="275" MaxWidth="275"
+        Background="CadetBlue" ResizeMode="NoResize">
+    <Window.Resources>
+        <ControlTemplate TargetType="Button" x:Key="btn_menu" x:Name="btn_control">
+            <Border  Background="{TemplateBinding Background}" CornerRadius="5" Height="{TemplateBinding Height}" 
+                    Width="{TemplateBinding Width}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                <TextBlock Text="{TemplateBinding Content}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontWeight="{TemplateBinding FontWeight}"
+                           />
+                </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Background" Value="Teal" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="False">
+                    <Setter Property="FontWeight" Value="Bold" />
+                    <Setter Property="Background" Value="DarkCyan" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate TargetType="Button" x:Key="btn_user">
+            <Border  Background="{TemplateBinding Background}" CornerRadius="5" Height="{TemplateBinding Height}" 
+                    Width="{TemplateBinding Width}"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+                <StackPanel>
+                    <Ellipse Width="5" Height="5" Fill="Red"></Ellipse>
+                    <TextBlock Text="{TemplateBinding Content}"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="{TemplateBinding FontSize}"
+                           FontWeight="{TemplateBinding FontWeight}"
+                           />
+                </StackPanel>
+            </Border>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid>        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <GridSplitter Grid.Row="1" ShowsPreview="False" Width="3"
+        HorizontalAlignment="Stretch" VerticalAlignment="Center" />
+        <StackPanel x:Name="MenuStrip" Grid.Row="0" Orientation="Horizontal">
+            <Button x:Name="btn_status" Content=" Status " Template="{StaticResource btn_menu}" Click="btn_status_Click" ></Button>
+            <Button x:Name="btn_allChat" Content=" All chat " Template="{StaticResource btn_menu}" ></Button>
+            <Button x:Name="btn_addChat" Content=" Add chat " Template="{StaticResource btn_menu}" ></Button>
+            <Button x:Name="btn_setings" Content=" Setings " Template="{StaticResource btn_menu}" ></Button>
+        </StackPanel>
+        <TextBlock Text=" Users " Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <StackPanel x:Name="stc_Users" Grid.Row="3">
+            
+        </StackPanel>
+    </Grid>
+</Window>
