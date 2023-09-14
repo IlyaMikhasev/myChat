@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:myChat"
         mc:Ignorable="d"
-        Title="ChatPanel" Height="724" Width="275" MinWidth="275" MaxWidth="275"
+        Title="ChatPanel" Height="724" Width="800" MinWidth="450"
         Background="CadetBlue" ResizeMode="NoResize">
-    <Window.Resources>
+    <Window.Resources>        
         <ControlTemplate TargetType="Button" x:Key="btn_menu" x:Name="btn_control">
             <Border  Background="{TemplateBinding Background}" CornerRadius="5" Height="{TemplateBinding Height}" 
                     Width="{TemplateBinding Width}"
@@ -48,24 +48,34 @@
             </Border>
         </ControlTemplate>
     </Window.Resources>
-    <Grid>        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <GridSplitter Grid.Row="1" ShowsPreview="False" Width="3"
+    <Grid x:Name="winChat">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        <GridSplitter Grid.Row="1" ShowsPreview="True" Height="3"
+        HorizontalAlignment="Center" VerticalAlignment="Stretch" />        
+        <Grid x:Name="leftbar" Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <GridSplitter Grid.Row="1" ShowsPreview="False" Width="3"
         HorizontalAlignment="Stretch" VerticalAlignment="Center" />
-        <StackPanel x:Name="MenuStrip" Grid.Row="0" Orientation="Horizontal">
-            <Button x:Name="btn_status" Content=" Status " Template="{StaticResource btn_menu}" Click="btn_status_Click" ></Button>
-            <Button x:Name="btn_allChat" Content=" All chat " Template="{StaticResource btn_menu}" ></Button>
-            <Button x:Name="btn_addChat" Content=" Add chat " Template="{StaticResource btn_menu}" ></Button>
-            <Button x:Name="btn_setings" Content=" Setings " Template="{StaticResource btn_menu}" ></Button>
-        </StackPanel>
-        <TextBlock Text=" Users " Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <StackPanel x:Name="stc_Users" Grid.Row="3">
-            
-        </StackPanel>
+            <StackPanel x:Name="MenuStrip" Grid.Row="0" Orientation="Horizontal">
+                <Button x:Name="btn_status" Content=" Status " Template="{StaticResource btn_menu}" Click="btn_status_Click" ></Button>
+                <Button x:Name="btn_allChat" Content=" All chat " Template="{StaticResource btn_menu}" ></Button>
+                <Button x:Name="btn_addChat" Content=" Add chat " Template="{StaticResource btn_menu}" ></Button>
+                <TextBox x:Name="tb_username" Width=" 70"/>
+                <Button x:Name="btn_setings" Content=" ReName " Template="{StaticResource btn_menu}" Click="btn_setings_Click" ></Button>
+            </StackPanel>
+            <TextBlock Text=" Users " Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <StackPanel x:Name="stc_Users" Grid.Row="3">
+
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

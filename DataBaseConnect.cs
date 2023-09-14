@@ -49,8 +49,8 @@ namespace myChat
         }
         public void AddUser(User name)
         {
-            my_query = @"INSERT INTO Users(Password, LoginName) " +
-                @"VALUES('" + name.Password + @"','" + name.LoginName + @"');";
+            my_query = @"INSERT INTO Users(Password, LoginName, position) " +
+                @"VALUES('" + name.Password + @"','" + name.LoginName + @"'," +name.isAdministration+");";
             sqlConnect(my_query);
         }
         private void messege(string messege,int user_id,int chat_id) {
@@ -59,46 +59,42 @@ namespace myChat
             sqlConnect(my_query);
         }
         private void updateAdministration(User user, int isAdmin) {
-            int position;
-            if(user.isAdministration)
-                position = 1;
-            else position = 0;
+            user.isAdministration=0;
             my_query = @"UPDATE Users" +
-                        @"SET position = " + position +
+                        @"SET position = " + isAdmin +
                         @"WHERE LoginName = '"+user.LoginName+ "' AND Password = "+user.Password +";";
             sqlConnect(my_query);
         }
-        private void updateUserName(User user)
+        public void updateUserName(User user)
         {            
             my_query = @"UPDATE Users" +
                         @"SET UserName = '" + user.Name+ "'"+
                         @"WHERE LoginName = '" + user.LoginName + "' AND Password = " + user.Password + ";";
             sqlConnect(my_query);
         }
-       public List<User> mychatLoad()
+       
+        public List<User> mychatLoad()
         {
             List<User> list = new List<User>();
-            User user = new User();
+            
             my_query = @"Select * From Users;";
             sqlConnect(my_query);
             if (_dr.HasRows)
             {
                 while (_dr.Read())
                 {
+                    User user = new User();
                     user.Id = _dr.GetInt32(0);
                     user.Password = _dr.GetInt32(1);
                     user.Name = _dr.GetString(2);
                     user.LoginName = _dr.GetString(3);
-                    if (_dr.GetInt32(4) == 0)
-                        user.isAdministration = false;
-                    else
-                        user.isAdministration = true;
+                    user.isAdministration = _dr.GetInt32(4);
                     list.Add(user);
                 }
             }
             return list;
         }
-        private void AddUserID(User user)
+       /* private void AddUserID(User user)
         {
             my_query = @"Select LoginName,Password FROM Users" +
                         @"WHERE LoginName = '" + user.LoginName + "' AND Password = " + user.Password + ";";
@@ -111,7 +107,7 @@ namespace myChat
                     user.Id = id;
                 }
             }
-        }
+        }*/
 
     }
 }

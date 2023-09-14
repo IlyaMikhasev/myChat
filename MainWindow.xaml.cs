@@ -40,13 +40,13 @@ namespace myChat
             {
                 if (use.LoginName == user.LoginName && use.Password == user.Password)
                 {
-                    chatPanel = new ChatPanel(user);
+                    chatPanel = new ChatPanel(use,users);
                     chatPanel.Show();
                     this.Close();
+                    return;
                 }
-                else
-                    MessageBox.Show("Несуществующий аккаунт");
             }
+            MessageBox.Show("Неверный логин или пароль");
         }
        
         private bool suitableLogin(string login)
@@ -64,11 +64,12 @@ namespace myChat
                 User user;
                 if (users.Count == 0)
                 {
-                    user = new User(tb_login.Text, pass_box.Password.GetHashCode(),true);
+                    user = new User(tb_login.Text, pass_box.Password.GetHashCode(),1);
                 }
                 else
                     user = new User(tb_login.Text, pass_box.Password.GetHashCode());
                 users.Add(user);
+                conn.AddUser(user);
             }
         }
         private bool isValidatePass(string password){
