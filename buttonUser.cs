@@ -11,18 +11,19 @@ namespace myChat
     {
         TextBlock textName ;
         TextBlock textIsOnline;
+        DockPanel dockPanel;
         public buttonUser(string name,string isOnline) {
             textName = new TextBlock();
             textName.Text = name;
             textIsOnline = new TextBlock();
-            textIsOnline.Text = isOnline;
-            DockPanel dockPanel = new DockPanel();
+            textIsOnline.Text =  "  "+isOnline;
+            dockPanel = new DockPanel();
             dockPanel.RenderSize = this.RenderSize;
             dockPanel.Children.Add(textName);
+            textName.SetValue(DockPanel.DockProperty, Dock.Left);// почему то не работает
             dockPanel.Children.Add(textIsOnline);
-            textIsOnline.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-            textName.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-            this.AddChild(dockPanel);
+            textIsOnline.SetValue(DockPanel.DockProperty, Dock.Right);// почему то не работает
+            this.Content = dockPanel;
         }
 
     }

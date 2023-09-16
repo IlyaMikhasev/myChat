@@ -82,6 +82,7 @@
       <DependentUpon>ChatPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataBaseConnect.cs" />
+    <Compile Include="Messege.cs" />
     <Compile Include="User.cs" />
     <Page Include="ChatPanel.xaml">
       <SubType>Designer</SubType>

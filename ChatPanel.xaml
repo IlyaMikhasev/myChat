@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:myChat"
         mc:Ignorable="d"
         Title="ChatPanel" Height="724" Width="800" MinWidth="450"
-        Background="CadetBlue" ResizeMode="NoResize">
+        Background="CadetBlue" ResizeMode="NoResize" Closed="Window_Closed">
     <Window.Resources>        
         <ControlTemplate TargetType="Button" x:Key="btn_menu" x:Name="btn_control">
             <Border  Background="{TemplateBinding Background}" CornerRadius="5" Height="{TemplateBinding Height}" 
@@ -54,7 +54,20 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
-        <GridSplitter Grid.Row="1" ShowsPreview="True" Height="3"
+        <Grid x:Name="messege_bar" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="0.1*" />
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="sp_messeges" Grid.Row="0">                
+            </StackPanel>
+            <DockPanel x:Name="dp_mesegeText" Grid.Row="1">
+                <TextBox x:Name="tb_messegeText" DockPanel.Dock="Left" Width="400" Height="20"/>
+                <Button x:Name="b_messege" Content="Отправить" DockPanel.Dock="Right" Height="20" Click="b_messege_Click"/>
+                <Button x:Name="b_smile" Content="🙂" DockPanel.Dock="Right" Width="20" Height="20" Click="btn_smile_click"/>
+            </DockPanel>
+        </Grid>
+        <GridSplitter Grid.Row="1" ShowsPreview="True" Height="3" IsEnabled="True"
         HorizontalAlignment="Center" VerticalAlignment="Stretch" />        
         <Grid x:Name="leftbar" Grid.Column="2">
             <Grid.RowDefinitions>
@@ -74,7 +87,6 @@
             </StackPanel>
             <TextBlock Text=" Users " Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <StackPanel x:Name="stc_Users" Grid.Row="3">
-
             </StackPanel>
         </Grid>
     </Grid>
