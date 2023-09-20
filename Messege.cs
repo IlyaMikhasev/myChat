@@ -35,6 +35,7 @@ namespace myChat
             textTime.Text = time;
             textMesege = new TextBlock();
             textMesege.Text = messege;
+            textTime.Foreground = new SolidColorBrush(Colors.LightGray);
             this.Children.Add(textTime);
             this.Children.Add(textName);
             this.Children.Add(textMesege);
@@ -42,7 +43,7 @@ namespace myChat
             textTime.SetValue(DockPanel.DockProperty, Dock.Right);
             textMesege.SetValue(DockPanel.DockProperty, Dock.Left);
             this.Background = myBrush;
-            this.Margin = new Thickness(0, 3, 0, 0);
+            this.Margin = new Thickness(0, 1, 0, 0);
         }
 
     }

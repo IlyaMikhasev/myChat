@@ -44,12 +44,12 @@ namespace myChat
             FillMessegeStack();
         }
         private void FillMessegeStack() {
-            sp_messeges.Children.Clear();
+            sp_messeges.Items.Clear();
             _messeges = _dbConnect.messegeHistory();
             foreach (var item in _messeges)
             {
-                MessegeForm mbut = new MessegeForm(item._userName, item._messege, item._time.ToString());
-                sp_messeges.Children.Add(mbut);
+                MessegeForm mbut = new MessegeForm(item._userName, item._messege, item._time.ToString("HH.mm.ss"));
+                sp_messeges.Items.Add(mbut);
             }
         }
         private void FillUsersStack() {
@@ -129,13 +129,16 @@ namespace myChat
             
         }
         private void btn_select_smile_click(object sender, RoutedEventArgs e) {
-            tb_messegeText.Text += ((Button)sender).Content;
+            tb_messegeText.AppendText(((Button)sender).Content.ToString());
         }
 
         private void b_messege_Click(object sender, RoutedEventArgs e)
         {
-            Messege messege = new Messege(tb_messegeText.Text,DateTime.Now,_myProfile.Name);
-            _dbConnect.messege(tb_messegeText.Text, _myProfile.Id, 1);
+            TextRange range = new TextRange(tb_messegeText.Document.ContentStart, tb_messegeText.Document.ContentEnd);
+
+            string allText = range.Text;
+            Messege messege = new Messege(allText,DateTime.Now,_myProfile.Name);
+            _dbConnect.messege(allText, _myProfile.Id, 1);
             FillMessegeStack();
         }
 
